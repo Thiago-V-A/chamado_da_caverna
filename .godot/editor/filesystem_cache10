@@ -1,6 +1,16 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1747246984
-icon.svg::CompressedTexture2D/CompressedTexture2D::898665867817632365::1747246827::1747246831::1::::<><><>0<>0<>dc42e95afdc9c1e02530d8682a83e7de<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
-::res://personagem/::1747246984
-acoes.png::CompressedTexture2D::3314624230059077684::1705809798::1747246984::1::::<><><>0<>0<>f5c0baf8b297a3eb07ff164cd75b97dc<>res://.godot/imported/acoes.png-4fbceef697d3411d268f6b72f79d8278.ctex::
-acoes_padrao.png::CompressedTexture2D/CompressedTexture2D::4814025191473641943::1705125472::1747246980::1::::<><><>0<>0<>b12425f3cfe665a8703f80c76262c6c4<>res://.godot/imported/acoes_padrao.png-7fe5e20120ab5e73900f17b425ac5aa9.ctex::
+::res://::1747935477
+icon.svg::CompressedTexture2D/CompressedTexture2D::898665867817632365::1747934890::1747934890::1::::<><><>0<>0<>dc42e95afdc9c1e02530d8682a83e7de<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://personagem/::1747935477
+acoes.png::CompressedTexture2D/CompressedTexture2D::3314624230059077684::1747934890::1747934890::1::::<><><>0<>0<>f5c0baf8b297a3eb07ff164cd75b97dc<>res://.godot/imported/acoes.png-4fbceef697d3411d268f6b72f79d8278.ctex::
+acoes_padrao.png::CompressedTexture2D/CompressedTexture2D::4814025191473641943::1747934890::1747934890::1::::<><><>0<>0<>b12425f3cfe665a8703f80c76262c6c4<>res://.godot/imported/acoes_padrao.png-7fe5e20120ab5e73900f17b425ac5aa9.ctex::
+personagem.gd::GDScript/GDScript::6373969206589544549::1747934890::0::1::::<>CharacterBody2D<><>0<>0<><>::
+personagem.tscn::PackedScene/PackedScene::3653525601210186671::1747934890::0::1::::<><><>0<>0<><>::uid://cw2ulu4u7xxej::::res://personagem/personagem.gd<>uid://cat7j6bxywtyl::::res://personagem/acoes_padrao.png<>uid://bnhvm2tuu0xps::::res://personagem/acoes.png
+::res://Sprite Sheet/::1747935452
+Little Mooni-Death.png::CompressedTexture2D::1272223438414878251::1747935451::1747935477::1::::<><><>0<>0<>840a96a1b09474175bb4822fb58e56ff<>res://.godot/imported/Little Mooni-Death.png-579e192173fc89b089215b65cf1c692f.ctex::
+Little Mooni-Heal.png::CompressedTexture2D::575039951731931482::1747935451::1747935477::1::::<><><>0<>0<>8331a2d7af5ea37e2d09c418e0c37866<>res://.godot/imported/Little Mooni-Heal.png-8caaa30026bad654532bfc33c038f0ac.ctex::
+Little Mooni-Idle Break.png::CompressedTexture2D::2086983629303721954::1747935451::1747935477::1::::<><><>0<>0<>08ec1a6652dc57be40d8c8251e7a9852<>res://.godot/imported/Little Mooni-Idle Break.png-34402cd5553e5edc7e4ae046d613d005.ctex::
+Little Mooni-Idle.png::CompressedTexture2D::2965093262649406095::1747935451::1747935477::1::::<><><>0<>0<>bb28883af56826694ce210fb6aefafcc<>res://.godot/imported/Little Mooni-Idle.png-fad4a68eaa831f5ae2a4b2b0bdcf6f8b.ctex::
+Little Mooni-Run.png::CompressedTexture2D::6610476826775213474::1747935451::1747935477::1::::<><><>0<>0<>e1c4d460cad29df019f3c76f9ed4d710<>res://.godot/imported/Little Mooni-Run.png-5930f8bd18729956c405afada0cbaeda.ctex::
+Little Mooni-Smash.png::CompressedTexture2D::7435929509698757185::1747935451::1747935477::1::::<><><>0<>0<>411c4ab391606eb580d8cf8f3cee1a20<>res://.godot/imported/Little Mooni-Smash.png-00976671ad2c6a8c37c59bcb839ef944.ctex::
+Little Mooni-Thrust.png::CompressedTexture2D::7476601090124953293::1747935451::1747935477::1::::<><><>0<>0<>d7906b4e479b143778d3eae4e50c84cd<>res://.godot/imported/Little Mooni-Thrust.png-d902e01ff555f9a93fbb2037d46d6027.ctex::

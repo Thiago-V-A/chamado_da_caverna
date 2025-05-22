@@ -3,12 +3,18 @@ extends CharacterBody2D
 var _sufixo_da_animacao: String = 'baixo'
 var _pode_atacar: bool = true
 
+
+@export var max_health := 100
+var health := max_health
 @export var _velocidade_de_movimento: float = 128
 @export var _animador_do_personagem: AnimationPlayer
 @export var _temporizador_de_acoes: Timer
 @export var _area_de_ataque: Area2D
+var is_dead := false
 
 func _physics_process(_delta: float) -> void:
+	if is_dead:
+		return
 	var direcao = Input.get_vector(
 		"mover_esquerda", "mover_direita", "mover_cima", "mover_baixo"
 	)
@@ -58,3 +64,21 @@ func _animar() -> void:
 func _on_temporazidaro_de_acoes_timeout() -> void:
 	set_physics_process(true)
 	_pode_atacar = true
+	
+# --- Novo método de dano e morte ---
+func take_damage(amount: int) -> void:
+	
+	if is_dead:
+		return
+	health -= amount
+	if health <= 0:
+		die()
+
+func die() -> void:
+	is_dead = true
+	_animador_do_personagem.play("morte" + _sufixo_da_animacao)
+	velocity = Vector2.ZERO
+	set_physics_process(false)
+	# Se quiser remover o personagem depois da animação de morte:
+	await _animador_do_personagem.animation_finished
+	queue_free()
