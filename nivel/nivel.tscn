@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cty4cmfuoiqt7"]
+
+[ext_resource type="PackedScene" uid="uid://bsb2bd8y5r8wx" path="res://personagem/personagem.tscn" id="1_mo1yv"]
+[ext_resource type="PackedScene" uid="uid://b7v4sgqs6vosf" path="res://terreno/terreno.tscn" id="2_0thrb"]
+
+[node name="Nivel" type="Node2D"]
+
+[node name="Terreno" parent="." instance=ExtResource("2_0thrb")]
+
+[node name="Personagem" parent="." instance=ExtResource("1_mo1yv")]
+position = Vector2(1, 0)
