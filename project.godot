@@ -14,6 +14,10 @@ config/name="Jogo"
 run/main_scene="uid://dcfwuscvi88xg"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
+[debug]
+
+shapes/depth_of_field/depth_of_field_use_jitter=true
+
 [display]
 
 window/size/viewport_width=640

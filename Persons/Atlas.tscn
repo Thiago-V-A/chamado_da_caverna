@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=3 uid="uid://dcfwuscvi88xg"]
+[gd_scene load_steps=132 format=3 uid="uid://dcfwuscvi88xg"]
 
 [ext_resource type="Script" uid="uid://dm0id6k5fwbet" path="res://Persons/atlas.gd" id="1_74dru"]
 [ext_resource type="Texture2D" uid="uid://4y7kyw652tli" path="res://Sprite Sheet/Little Mooni-Idle Break.png" id="1_h30fx"]
@@ -9,9 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dd7aw4sy1saib" path="res://Sprite Sheet/Little Mooni-Smash.png" id="7_ojsbm"]
 [ext_resource type="Texture2D" uid="uid://deryr66fi2e5j" path="res://Sprite Sheet/Little Mooni-Thrust.png" id="8_i64b2"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_74dru"]
-radius = 2.0
-height = 10.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_lrstp"]
+radius = 4.12311
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fnx0k"]
 atlas = ExtResource("2_qic46")
@@ -891,15 +890,17 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qic46"]
+
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemies"]]
 position = Vector2(1, -1)
 script = ExtResource("1_74dru")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." groups=["enemies"]]
 show_behind_parent = true
 position = Vector2(0, -1)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_74dru")
+shape = SubResource("CircleShape2D_lrstp")
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 
@@ -909,3 +910,12 @@ sprite_frames = SubResource("SpriteFrames_fnx0k")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.563999
+
+[node name="AreaDeAtaque" type="Area2D" parent="."]
+position = Vector2(0, 8)
+
+[node name="ColisaoDaArea" type="CollisionShape2D" parent="AreaDeAtaque"]
+light_mask = 3
+visibility_layer = 3
+shape = SubResource("CircleShape2D_qic46")
+disabled = true

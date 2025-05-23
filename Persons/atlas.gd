@@ -1,15 +1,22 @@
 extends CharacterBody2D
 
-@export var speed := 100
+@export var speed := 80
 @export var max_health := 100
 @export var regen_amount := 5
 @export var regen_interval := 3.0
 @export var attack_slow_damage := 30
 @export var attack_fast_damage := 8
-@export var attack_range := 40.0
+@export var attack_range := 15.0
 @export var attack_cooldown := 1.5
 @export var attack_fast_cooldown := 0.5
 
+#Fuga:
+var is_fleeing := false
+@export var flee_speed := 200.0
+@export var flee_distance := 300.0
+@export var low_health_threshold := 30
+
+#Atributo:
 var current_health := max_health
 var target: CharacterBody2D = null
 var attack_timer := 0.0
@@ -35,21 +42,33 @@ func _physics_process(delta):
 
 	# Distância até o alvo
 	var distance = position.distance_to(target.position)
-
+	
+	# Inicia processo de fuga
+	#if is_fleeing:
+		#_flee_from_target(delta)
+		#return
+#
+	#if current_health <= low_health_threshold:
+		#_start_flee()
+		#return
+	
 	# Ataque se estiver perto
 	if distance <= attack_range:
 		if attack_timer <= 0:
 			_attack(target)
+	elif attack_timer > 0:
+		return;
 	else:
 		_chase_target(delta)
+	
+	
 
-	_handle_regen()
-
-func _chase_target(delta):
+func _chase_target(delta):	
 	var direction = (target.position - position).normalized()
 	velocity = direction * speed
 	move_and_slide()
 	sprite.play("run")
+	
 
 func _attack(player):
 	var use_slow = randf() < 0.3  # 30% de chance de ataque forte
@@ -61,7 +80,7 @@ func _attack(player):
 		sprite.play("thrust")
 		player.call_deferred("take_damage", attack_fast_damage)
 		attack_timer = attack_fast_cooldown
-
+	
 func _handle_regen():
 	if regen_timer >= regen_interval and current_health < max_health:
 		current_health = min(current_health + regen_amount, max_health)
@@ -78,3 +97,19 @@ func _die():
 	velocity = Vector2.ZERO
 	sprite.play("death")
 	set_physics_process(false)
+	
+#func _start_flee():
+	#is_fleeing = true
+	#sprite.play("run")
+	#
+#func _flee_from_target(delta):
+	#var away_direction = (position - target.position).normalized()
+	#velocity = away_direction * flee_speed
+	#move_and_slide()
+#
+	## Se já correu o suficiente, para de fugir e começa regenerar
+	#if position.distance_to(target.position) >= flee_distance:
+		#velocity = Vector2.ZERO
+		#move_and_slide()
+		#sprite.play("idle")
+		#_handle_regen()

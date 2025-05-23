@@ -1,5 +1,5 @@
 res://personagem/personagem.tscn
 res://Persons/Atlas.tscn
+res://game_fight.tscn
 res://Persons/atlas.gd
 res://personagem/personagem.gd
-res://game_fight.tscn

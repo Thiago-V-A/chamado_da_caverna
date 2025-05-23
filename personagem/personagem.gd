@@ -10,6 +10,8 @@ var health := max_health
 @export var _animador_do_personagem: AnimationPlayer
 @export var _temporizador_de_acoes: Timer
 @export var _area_de_ataque: Area2D
+@export var dano_do_ataque := 50
+
 var is_dead := false
 
 func _physics_process(_delta: float) -> void:
@@ -51,6 +53,12 @@ func _atacar() -> void:
 		_pode_atacar = false
 		set_physics_process(false)
 
+		# Verifica quem está na área de ataque
+		for corpo in _area_de_ataque.get_overlapping_bodies():
+			if corpo.is_in_group("enemies"):
+				corpo.take_damage(dano_do_ataque)
+
+
 func _animar() -> void:
 	if _pode_atacar == false:
 		return
@@ -79,6 +87,6 @@ func die() -> void:
 	_animador_do_personagem.play("morte" + _sufixo_da_animacao)
 	velocity = Vector2.ZERO
 	set_physics_process(false)
-	# Se quiser remover o personagem depois da animação de morte:
-	await _animador_do_personagem.animation_finished
 	queue_free()
+
+	
