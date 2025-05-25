@@ -1,9 +1,10 @@
+CollisionShape2D
 TileMapLayer
 Camera2D
+AnimatedSprite2D
+CharacterBody2D
 Label
-CollisionShape2D
 Area2D
 Timer
 AnimationPlayer
 Sprite2D
-CharacterBody2D
