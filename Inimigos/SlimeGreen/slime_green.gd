@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var max_health := 30
 @export var attack_range := 0
 @export var attack_cooldown := 1.5
+@export var _jump_timer: Timer
 
 #Atributo:
 var current_health := max_health
@@ -12,15 +13,14 @@ var target: CharacterBody2D = null
 var attack_timer := 0.0
 var is_dead := false
 
-@export var jump_interval := 2.0
-@export var jump_force := -200.0
-
-var jump_timer := 0.0
-
+#Timer
+var _wait_time = 2
 
 @onready var sprite := $Animacao
 
 func _ready():
+	_wait_time = 2
+	_jump_timer.start(_wait_time)
 #	Perseguir player
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
@@ -53,17 +53,17 @@ func _physics_process(delta):
 			_attack(target)
 	else:
 		_chase_target(delta)
-		#jump_timer -= delta
-		#if jump_timer <= 0:
-			#_chase_target(delta)
-			#jump_timer = 2
-		#else:
-			#return
-		
 
-func _chase_target(delta):
+func _on_jump_timer_timeout() -> void:
+	return
+
+func _get_direction() -> Vector2:
 	var direction = (target.position - position).normalized()
-	velocity = direction * speed
+	return direction
+	
+func _chase_target(delta):
+	_jump_timer.start(_wait_time)
+	velocity = _get_direction() * speed
 	move_and_slide()
 	sprite.play("correndo")
 
