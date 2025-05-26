@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4sy6ufr8gqu1"
-path="res://.godot/imported/slime-green.png-9dfc85f71119ed034ef4fb818dd60543.ctex"
+uid="uid://3pfjmsjsp0qg"
+path="res://.godot/imported/slime-green-damage.png-91085f83091ab6f792a350ce9fd3a93f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Inimigos/slime-green.png"
-dest_files=["res://.godot/imported/slime-green.png-9dfc85f71119ed034ef4fb818dd60543.ctex"]
+source_file="res://Inimigos/SlimeGreen/slime-green-damage.png"
+dest_files=["res://.godot/imported/slime-green-damage.png-91085f83091ab6f792a350ce9fd3a93f.ctex"]
 
 [params]
 

@@ -14,8 +14,6 @@ height = 10.0
 
 [node name="Personagem" parent="." instance=ExtResource("2_aev2q")]
 position = Vector2(46, 108)
-collision_layer = 1
-collision_mask = 2
 
 [node name="Camera2D2" type="Camera2D" parent="Personagem"]
 
@@ -26,4 +24,3 @@ shape = SubResource("CapsuleShape2D_namkp")
 
 [node name="SlimeGreen" parent="." instance=ExtResource("3_aev2q")]
 position = Vector2(52, 150)
-collision_layer = 2

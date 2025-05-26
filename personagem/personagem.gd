@@ -9,6 +9,7 @@ var _pode_atacar: bool = true
 @export var _temporizador_de_acoes: Timer
 @export var _area_de_ataque: Area2D
 @export var _texto_arma_atual: Label
+var target: CharacterBody2D = null
 
 func _process(_delta: float) -> void:
 	var direcao = Input.get_vector(
