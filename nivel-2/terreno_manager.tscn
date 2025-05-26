@@ -1,8 +1,10 @@
-[gd_scene load_steps=21 format=4 uid="uid://btcp3due1cynf"]
+[gd_scene load_steps=25 format=4 uid="uid://btcp3due1cynf"]
 
 [ext_resource type="Texture2D" uid="uid://devl8c41o5kg3" path="res://nivel-2/caverna/Tileset.png" id="1_ybdb5"]
 [ext_resource type="Texture2D" uid="uid://cn5d4y1puj5ww" path="res://nivel-2/caverna/objetos-caveira/Objects_separately/Bones_shadow1_1.png" id="2_24n15"]
+[ext_resource type="Texture2D" uid="uid://dmvro338tsjc0" path="res://nivel-2/caverna/objetos-caverna/64/Dinosaur_skeleton__head_dark_shadow.png" id="2_w6y01"]
 [ext_resource type="Texture2D" uid="uid://o04yontste26" path="res://nivel-2/caverna/objetos-caveira/Objects_separately/Bones_shadow1_2.png" id="3_4w3qg"]
+[ext_resource type="Texture2D" uid="uid://dfwbjkfi6teh0" path="res://nivel-2/caverna/objetos-caverna/128/Dinosaur_skeleton_part1_dark_shadow.png" id="3_sekgy"]
 [ext_resource type="Texture2D" uid="uid://b1di2ye482q1h" path="res://nivel-2/caverna/objetos-caveira/Objects_separately/Bones_shadow1_3.png" id="4_w6y01"]
 [ext_resource type="Texture2D" uid="uid://bgmuihdjh7vj1" path="res://nivel-2/caverna/objetos-caveira/Objects_separately/Bones_shadow1_7.png" id="5_sekgy"]
 [ext_resource type="Texture2D" uid="uid://cfpboq68wcb11" path="res://nivel-2/caverna/objetos-caveira/Objects_separately/Broken_tree_shadow2_3.png" id="6_bd7f3"]
@@ -90,6 +92,16 @@ texture = ExtResource("1_ybdb5")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_jhb47")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bd7f3"]
+texture = ExtResource("2_w6y01")
+0:0/size_in_atlas = Vector2i(4, 4)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i4yin"]
+texture = ExtResource("3_sekgy")
+0:0/size_in_atlas = Vector2i(8, 8)
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h46bw"]
 texture = ExtResource("2_24n15")
 0:0/0 = 0
@@ -131,6 +143,8 @@ sources/53 = SubResource("TileSetAtlasSource_cfldy")
 sources/54 = SubResource("TileSetAtlasSource_n4aej")
 sources/57 = SubResource("TileSetAtlasSource_odxfv")
 sources/58 = SubResource("TileSetAtlasSource_1e7iv")
+sources/1 = SubResource("TileSetAtlasSource_bd7f3")
+sources/2 = SubResource("TileSetAtlasSource_i4yin")
 
 [node name="TerrenoManager" type="Node2D"]
 
@@ -151,5 +165,5 @@ tile_map_data = PackedByteArray("AAD9//r/AAABAAUAAAD+//r/AAABAAUAAAD+//v/AAABAAU
 tile_set = SubResource("TileSet_hj561")
 
 [node name="ossos" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AADx/xEANAAAAAAAAADx/xIANAAAAAEAAADy/xEANAABAAAAAADy/xIANAABAAEAAADu/xAANgAAAAEAAADv/xAANgABAAEAAADu/w8ANgAAAAAAAADv/w8ANgABAAAAAAAKAAAANQAAAAAAAAARAP//NAAAAAAAABAQAP//NAABAAAAABARAAAANAAAAAEAABAQAAAANAABAAEAABAfAAsAOgAAAAAAAAAfAAwAOgAAAAEAAAAgAAsAOgABAAAAAAAgAAwAOgABAAEAAAAeAAsANAAAAAAAABAdAAsANAABAAAAABAeAAwANAAAAAEAABAdAAwANAABAAEAABAeABEAOQAAAAAAAAD0/xAANAABAAEAACD0/xEANAABAAAAACDz/xAANAAAAAEAACDz/xEANAAAAAAAACDv/xEAOgAAAAAAAADv/xIAOgAAAAEAAADw/xEAOgABAAAAAADw/xIAOgABAAEAAAA=")
+tile_map_data = PackedByteArray("AADx/xEANAAAAAAAAADx/xIANAAAAAEAAADy/xEANAABAAAAAADy/xIANAABAAEAAADu/xAANgAAAAEAAADv/xAANgABAAEAAADu/w8ANgAAAAAAAADv/w8ANgABAAAAAAAKAAAANQAAAAAAAAARAP//NAAAAAAAABAQAP//NAABAAAAABARAAAANAAAAAEAABAQAAAANAABAAEAABAfAAsAOgAAAAAAAAAfAAwAOgAAAAEAAAAgAAsAOgABAAAAAAAgAAwAOgABAAEAAAAeAAsANAAAAAAAABAdAAsANAABAAAAABAeAAwANAAAAAEAABAdAAwANAABAAEAABAeABEAOQAAAAAAAAD0/xAANAABAAEAACD0/xEANAABAAAAACDz/xAANAAAAAEAACDz/xEANAAAAAAAACDv/xEAOgAAAAAAAADv/xIAOgAAAAEAAADw/xEAOgABAAAAAADw/xIAOgABAAEAAAAZABIAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_i4yin")

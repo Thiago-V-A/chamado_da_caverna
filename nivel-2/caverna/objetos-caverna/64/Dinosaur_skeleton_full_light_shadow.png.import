@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dglhsauv353ss"
-path="res://.godot/imported/Dinosaur_skeleton__light_dark_shadow.png-5a3b98536da520515b1b713a441cea32.ctex"
+uid="uid://c6h88n3lv2iu"
+path="res://.godot/imported/Dinosaur_skeleton_full_light_shadow.png-6d2067f48ccfd185bfba117556c0208a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://nivel-2/caverna/objetos-caverna/64/Dinosaur_skeleton__light_dark_shadow.png"
-dest_files=["res://.godot/imported/Dinosaur_skeleton__light_dark_shadow.png-5a3b98536da520515b1b713a441cea32.ctex"]
+source_file="res://nivel-2/caverna/objetos-caverna/64/Dinosaur_skeleton_full_light_shadow.png"
+dest_files=["res://.godot/imported/Dinosaur_skeleton_full_light_shadow.png-6d2067f48ccfd185bfba117556c0208a.ctex"]
 
 [params]
 
