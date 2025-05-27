@@ -32,7 +32,7 @@ func _ready():
 	
 #	Multiplicado de slime
 	var multiply_timer = Timer.new()
-	multiply_timer.wait_time = 5.0
+	multiply_timer.wait_time = 8.0
 	multiply_timer.one_shot = false
 	multiply_timer.autostart = true
 	add_child(multiply_timer)
@@ -53,7 +53,7 @@ func _physics_process(delta):
 			_attack(target)
 	else:
 		_chase_target(delta)
-
+	
 func _on_jump_timer_timeout() -> void:
 	return
 

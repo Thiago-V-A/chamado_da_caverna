@@ -9,12 +9,14 @@ radius = 2.0
 height = 10.0
 
 [node name="nivel-2" type="Node2D"]
+position = Vector2(0, 1)
 
 [node name="TerrenoManager" parent="." instance=ExtResource("1_namkp")]
 
 [node name="Personagem" parent="." instance=ExtResource("2_aev2q")]
-position = Vector2(46, 109)
+position = Vector2(46, 108)
 collision_layer = 1
+collision_mask = 2
 
 [node name="Camera2D2" type="Camera2D" parent="Personagem"]
 
