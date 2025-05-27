@@ -1,3 +1,4 @@
+TileMapLayer
 Timer
 NavigationRegion2D
 Polygon2D
@@ -6,7 +7,6 @@ AnimationPlayer
 CollisionShape2D
 CharacterBody2D
 Node
-TileMapLayer
 Camera2D
 AnimatedSprite2D
 Label

@@ -27,8 +27,3 @@ shape = SubResource("CapsuleShape2D_namkp")
 [node name="SlimeGreen" parent="." instance=ExtResource("3_aev2q")]
 position = Vector2(52, 150)
 collision_layer = 2
-speed = 80
-attack_damage = 10
-max_health = 30
-attack_range = 0
-attack_cooldown = 1.5
