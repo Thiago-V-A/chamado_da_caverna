@@ -1,5 +1,6 @@
-NavigationRegion2D
 TileMapLayer
+TileMap
+NavigationRegion2D
 Timer
 Polygon2D
 Sprite2D

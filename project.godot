@@ -26,6 +26,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Jogo"
 
+[editor]
+
+movie_writer/movie_file="/home/thiago/jogo/gravação/filme.avi"
+
 [input]
 
 mover_esquerda={
