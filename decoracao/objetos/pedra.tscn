@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhss6ufu8kjtl"]
+
+[ext_resource type="PackedScene" uid="uid://c4na2lh6cx8m3" path="res://decoracao/objetos/objeto_de_base.tscn" id="1_8wq0p"]
+[ext_resource type="Texture2D" uid="uid://vsmi4bqy22il" path="res://terreno/tiles/Outdoor_Decor_Free.png" id="2_m8ybn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8ybn"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mrkq2"]
+radius = 8.0
+
+[node name="pedra" instance=ExtResource("1_8wq0p")]
+position = Vector2(0, 0)
+
+[node name="Colisao" parent="." index="0"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_m8ybn")
+
+[node name="ColisaoFisica" parent="CorpoFisico" index="0"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_mrkq2")
+
+[node name="Textura" parent="." index="2"]
+position = Vector2(0, -5)
+texture = ExtResource("2_m8ybn")
+region_enabled = true
+region_rect = Rect2(0, 48, 16, 16)

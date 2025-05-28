@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://0wdupqfi8xp"]
+
+[ext_resource type="PackedScene" uid="uid://c4na2lh6cx8m3" path="res://decoracao/objetos/objeto_de_base.tscn" id="1_vbw6d"]
+[ext_resource type="Texture2D" uid="uid://dwyx4l5qpjl1d" path="res://decoracao/tiles/Chest.png" id="2_0bgyw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vbw6d"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vbw6d"]
+size = Vector2(14, 7)
+
+[node name="bau" instance=ExtResource("1_vbw6d")]
+
+[node name="Colisao" parent="." index="0"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_vbw6d")
+
+[node name="ColisaoFisica" parent="CorpoFisico" index="0"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_vbw6d")
+
+[node name="Textura" parent="." index="2"]
+position = Vector2(0, -6)
+texture = ExtResource("2_0bgyw")

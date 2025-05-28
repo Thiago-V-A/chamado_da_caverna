@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bsb2bd8y5r8wx"]
+[gd_scene load_steps=26 format=3 uid="uid://bsb2bd8y5r8wx"]
 
 [ext_resource type="Script" uid="uid://cw2ulu4u7xxej" path="res://personagem/personagem.gd" id="1_eg6rg"]
 [ext_resource type="Texture2D" uid="uid://cat7j6bxywtyl" path="res://personagem/acoes_padrao.png" id="2_eg6rg"]
@@ -1262,6 +1262,9 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_7syfo"]
 font_size = 8
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_defmj"]
+radius = 4.0
+
 [node name="Personagem" type="CharacterBody2D" node_paths=PackedStringArray("_animador_do_personagem", "_temporizador_de_acoes", "_area_de_ataque", "_texto_arma_atual") groups=["player"]]
 collision_layer = 3
 collision_mask = 3
@@ -1317,6 +1320,9 @@ vertical_alignment = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
+
+[node name="ColisaoPersonagem" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_defmj")
 
 [connection signal="timeout" from="TemporazidaroDeAcoes" to="." method="_on_temporazidaro_de_acoes_timeout"]
 [connection signal="area_entered" from="AreaDeAtaque" to="." method="_quando_acertar_corpo"]

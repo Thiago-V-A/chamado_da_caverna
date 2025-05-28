@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://r3cawh5ewu3e"]
+
+[ext_resource type="PackedScene" uid="uid://c4na2lh6cx8m3" path="res://decoracao/objetos/objeto_de_base.tscn" id="1_jrdru"]
+[ext_resource type="Texture2D" uid="uid://bnux81ffvd86c" path="res://decoracao/tiles/Oak_Tree_Small.png" id="2_7qyp6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jrdru"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7qyp6"]
+radius = 4.0
+
+[node name="arvore_menor" instance=ExtResource("1_jrdru")]
+
+[node name="Colisao" parent="." index="0"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_jrdru")
+
+[node name="ColisaoFisica" parent="CorpoFisico" index="0"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_7qyp6")
+
+[node name="Textura" parent="." index="2"]
+position = Vector2(0, -8)
+texture = ExtResource("2_7qyp6")
+hframes = 3
+frame = 1

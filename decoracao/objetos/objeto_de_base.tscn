@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c4na2lh6cx8m3"]
+
+[node name="objeto_de_base" type="Area2D"]
+position = Vector2(-1, 0)
+
+[node name="Colisao" type="CollisionShape2D" parent="."]
+
+[node name="CorpoFisico" type="StaticBody2D" parent="."]
+
+[node name="ColisaoFisica" type="CollisionShape2D" parent="CorpoFisico"]
+
+[node name="Textura" type="Sprite2D" parent="."]
