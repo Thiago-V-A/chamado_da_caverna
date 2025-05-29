@@ -24,5 +24,5 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_namkp")
 
 [node name="SlimeGreen" parent="." instance=ExtResource("3_aev2q")]
-position = Vector2(52, 150)
+position = Vector2(186, 818)
 collision_layer = 2

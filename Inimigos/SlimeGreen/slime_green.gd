@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed := 80
+@export var speed := 50
 @export var attack_damage = 10
 @export var max_health := 30
 @export var attack_range := 0
