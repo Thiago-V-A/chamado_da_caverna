@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed := 50
+@export var speed := 80
 @export var attack_damage = 10
 @export var max_health := 30
 @export var attack_range := 0
@@ -22,13 +22,6 @@ func _ready():
 	_wait_time = 2
 	_jump_timer.start(_wait_time)
 #	Perseguir player
-	var players = get_tree().get_nodes_in_group("player")
-	if players.size() > 0:
-		target = players[0]
-	else:
-		push_error("Nenhum nó no grupo 'player' encontrado.")
-		
-	add_to_group("slimes")
 	
 #	Multiplicado de slime
 	var multiply_timer = Timer.new()
