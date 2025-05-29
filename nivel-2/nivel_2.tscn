@@ -13,7 +13,7 @@ height = 10.0
 [node name="TerrenoManager" parent="." instance=ExtResource("1_namkp")]
 
 [node name="Personagem" parent="." instance=ExtResource("2_aev2q")]
-position = Vector2(46, 109)
+position = Vector2(65, -33)
 collision_layer = 1
 
 [node name="Camera2D2" type="Camera2D" parent="Personagem"]

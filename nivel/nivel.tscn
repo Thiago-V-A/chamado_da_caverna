@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://cty4cmfuoiqt7"]
+[gd_scene load_steps=8 format=4 uid="uid://cty4cmfuoiqt7"]
 
 [ext_resource type="PackedScene" uid="uid://bsb2bd8y5r8wx" path="res://personagem/personagem.tscn" id="1_mo1yv"]
 [ext_resource type="PackedScene" uid="uid://b7v4sgqs6vosf" path="res://terreno/terreno.tscn" id="2_0thrb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://r3cawh5ewu3e" path="res://decoracao/objetos/arvore_menor.tscn" id="4_kvd15"]
 [ext_resource type="PackedScene" uid="uid://dhss6ufu8kjtl" path="res://decoracao/objetos/pedra.tscn" id="5_3j3pl"]
 [ext_resource type="PackedScene" uid="uid://0wdupqfi8xp" path="res://decoracao/objetos/bau.tscn" id="6_upjwp"]
+[ext_resource type="PackedScene" uid="uid://uiw70dse8mbm" path="res://portal/portal.tscn" id="7_upjwp"]
 
 [node name="Nivel" type="Node2D"]
 
@@ -60,5 +61,9 @@ position = Vector2(332, 340)
 
 [node name="bau" parent="YSort" instance=ExtResource("6_upjwp")]
 position = Vector2(461, 222)
+
+[node name="portal" parent="." instance=ExtResource("7_upjwp")]
+position = Vector2(-30, 21)
+next_scene = "res://nivel-2/nivel_2.tscn"
 
 [editable path="Terreno"]
