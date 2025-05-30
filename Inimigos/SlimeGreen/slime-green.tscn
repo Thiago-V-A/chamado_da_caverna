@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt7b32o5fknfk"]
+[gd_scene load_steps=10 format=3 uid="uid://dt7b32o5fknfk"]
 
 [ext_resource type="Script" uid="uid://bjxd2iacp7e12" path="res://Inimigos/SlimeGreen/slime_green.gd" id="1_coejx"]
 [ext_resource type="Texture2D" uid="uid://b4sy6ufr8gqu1" path="res://Inimigos/SlimeGreen/slime-green.png" id="1_yxl3o"]
+[ext_resource type="Script" uid="uid://dog4i35xnjiel" path="res://Inimigos/SlimeGreen/area_ataque.gd" id="3_rnmtb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_coejx"]
-radius = 8.06226
+radius = 7.0
 
 [sub_resource type="Animation" id="Animation_rnmtb"]
 resource_name = "correndo"
@@ -64,6 +65,8 @@ _data = {
 &"parado": SubResource("Animation_104at")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_104at"]
+
 [node name="SlimeGreen" type="CharacterBody2D" node_paths=PackedStringArray("_jump_timer") groups=["inimigos", "slimes"]]
 position = Vector2(0, -7)
 script = ExtResource("1_coejx")
@@ -88,4 +91,13 @@ libraries = {
 wait_time = 6.943
 one_shot = true
 
+[node name="AreaAtaque" type="Area2D" parent="."]
+collision_layer = 2
+script = ExtResource("3_rnmtb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAtaque"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_104at")
+
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="body_entered" from="AreaAtaque" to="AreaAtaque" method="_on_body_entered"]

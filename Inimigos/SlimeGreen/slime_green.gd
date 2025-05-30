@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed := 80
+@export var speed := 60
 @export var attack_damage = 10
 @export var max_health := 30
 @export var attack_range := 0
@@ -19,10 +19,15 @@ var _wait_time = 2
 @onready var sprite := $Animacao
 
 func _ready():
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		target = players[0]
+	else:
+		push_error("Nenhum nó no grupo 'player' encontrado.")
+
+
 	_wait_time = 2
 	_jump_timer.start(_wait_time)
-#	Perseguir player
-	
 #	Multiplicado de slime
 	var multiply_timer = Timer.new()
 	multiply_timer.wait_time = 8.0
@@ -63,16 +68,16 @@ func _chase_target(delta):
 func _attack(player):
 		attack_timer = attack_cooldown
 
-func take_damage(amount: int, attacker_position: Vector2):
+func take_damage(amount: int):
 	if is_dead:
 		return
 
 	current_health -= amount
 	
-	# Empurra para trás
-	var knockback_direction = (position - attacker_position).normalized()
-	velocity = knockback_direction * 100  # ajuste a força do recuo conforme quiser
-
+	## Empurra para trás
+	#var knockback_direction = (position - attacker_position).normalized()
+	#velocity = knockback_direction * 100  # ajuste a força do recuo conforme quiser
+	print(current_health)
 	if current_health <= 0:
 		_die()
 
@@ -93,3 +98,4 @@ func _die():
 	velocity = Vector2.ZERO
 	sprite.play("morte")
 	set_physics_process(false)
+	queue_free()

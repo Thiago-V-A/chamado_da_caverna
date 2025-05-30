@@ -3,6 +3,9 @@ extends CharacterBody2D
 var _arma_atual: String = "espada"
 var _sufixo_da_animacao: String = "_baixo"
 var _pode_atacar: bool = true
+var _vida_atual: int = 100
+var _is_dead: bool;
+var _ataque_ativo := false
 
 @export var _velocidade_de_movimento: float = 128
 @export var _animador_do_personagem: AnimationPlayer
@@ -52,13 +55,17 @@ func _definir_arma_atual() -> void:
 	_texto_arma_atual.text = _arma_atual
 
 
-func _atacar() -> void:
+func _atacar(body = null) -> void:
 	if Input.is_action_just_pressed("atacar") and _pode_atacar:
 		_animador_do_personagem.play("atacando_" + _arma_atual + _sufixo_da_animacao)
+		_ataque_ativo = true  # Ativa o modo ataque
 		_temporizador_de_acoes.start(0.4)
 		_pode_atacar = false
-		
 		set_process(false)
+
+		await get_tree().create_timer(0.2).timeout  # tempo do impacto
+		_ataque_ativo = false  # Desativa ataque após impacto
+
 
 func _animar() -> void:
 	if _pode_atacar == false:
@@ -73,3 +80,24 @@ func _animar() -> void:
 func _on_temporazidaro_de_acoes_timeout() -> void:
 	set_process(true)
 	_pode_atacar = true
+
+func take_damage(amount: int):
+	if _is_dead == true:
+		return
+		
+	_vida_atual -= amount
+	print(_vida_atual)
+	if _vida_atual <= 0:
+		_die()
+
+func _die():
+	_is_dead = true
+	velocity = Vector2.ZERO
+	set_physics_process(false)
+	queue_free()
+
+
+func _on_area_de_ataque_body_entered(body: Node2D) -> void:
+	if _ataque_ativo and body.is_in_group("inimigos"):
+		body.take_damage(20)
+	return
