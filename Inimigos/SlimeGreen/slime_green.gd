@@ -8,15 +8,18 @@ extends CharacterBody2D
 @export var _jump_timer: Timer
 
 #Atributo:
+var knockback_velocity := Vector2.ZERO
+var knockback_timer := 0.0
 var current_health := max_health
 var target: CharacterBody2D = null
 var attack_timer := 0.0
 var is_dead := false
-
-#Timer
+var is_stunned := false
+var stun_duration := 0.3  # segundos de interrupção
 var _wait_time = 2
 
 @onready var sprite := $Animacao
+@onready var skin:= $Skin
 
 func _ready():
 	var players = get_tree().get_nodes_in_group("player")
@@ -37,28 +40,42 @@ func _ready():
 	multiply_timer.timeout.connect(_on_multiply_timeout)
 
 func _physics_process(delta):
-	if is_dead or not target or not is_instance_valid(target):
-		return
-
-	attack_timer -= delta
-
-	# Distância até o alvo
-	var distance = position.distance_to(target.position)
-	
-	# Ataque se estiver perto
-	if distance == attack_range:
-		if attack_timer <= 0:
-			_attack(target)
+	if is_dead:
+		velocity = Vector2.ZERO
+		sprite.play("morrendo")
+		await get_tree().create_timer(10).timeout
+		set_physics_process(false)
+		queue_free()
 	else:
-		_chase_target(delta)
-	
+		if not target or not is_instance_valid(target):
+			return
+			
+		if knockback_timer > 0.0:
+			velocity = knockback_velocity
+			move_and_slide()
+			knockback_timer -= delta
+
+		if is_stunned:
+			velocity = Vector2.ZERO
+			await get_tree().create_timer(0.5).timeout
+			sprite.play("parado")
+			is_stunned = false
+
+		attack_timer -= delta
+		var distance = position.distance_to(target.position)
+		if distance <= attack_range:
+			if attack_timer <= 0:
+				_attack(target)
+		else:
+			_chase_target(delta)
+
 func _on_jump_timer_timeout() -> void:
 	return
 
 func _get_direction() -> Vector2:
 	var direction = (target.position - position).normalized()
 	return direction
-	
+
 func _chase_target(delta):
 	_jump_timer.start(_wait_time)
 	velocity = _get_direction() * speed
@@ -68,15 +85,18 @@ func _chase_target(delta):
 func _attack(player):
 		attack_timer = attack_cooldown
 
-func take_damage(amount: int):
+func take_damage(amount: int, attacker_position: Vector2):
 	if is_dead:
 		return
 
 	current_health -= amount
-	
-	## Empurra para trás
-	#var knockback_direction = (position - attacker_position).normalized()
-	#velocity = knockback_direction * 100  # ajuste a força do recuo conforme quiser
+	_piscar_dano()
+
+	# knockback
+	var direction = (position - attacker_position).normalized()
+	knockback_velocity = direction * 150
+	knockback_timer = 0.2
+	is_stunned = true
 	print(current_health)
 	if current_health <= 0:
 		_die()
@@ -84,18 +104,22 @@ func take_damage(amount: int):
 func _on_multiply_timeout():
 	if is_dead:
 		return
-	
+
 	var slime_count = get_tree().get_nodes_in_group("slimes").size()
 	if slime_count >= 8:
 		return
-	
+
 	var new_slime = duplicate()
 	new_slime.position = position + Vector2(20, 0) # ligeiramente ao lado
 	get_parent().add_child(new_slime)
 
+func _piscar_dano():
+	for i in range(3):
+		var original_color = skin.modulate
+		skin.modulate = Color(1, 0, 0, 0.5)  # vermelho com 50% de opacidade
+		await get_tree().create_timer(0.1).timeout
+		skin.modulate = original_color
+
 func _die():
 	is_dead = true
-	velocity = Vector2.ZERO
-	sprite.play("morte")
-	set_physics_process(false)
-	queue_free()
+	

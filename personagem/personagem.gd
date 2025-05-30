@@ -3,6 +3,7 @@ extends CharacterBody2D
 var _arma_atual: String = "espada"
 var _sufixo_da_animacao: String = "_baixo"
 var _pode_atacar: bool = true
+var _dano_ataque: int = 15
 var _vida_atual: int = 100
 var _is_dead: bool;
 var _ataque_ativo := false
@@ -99,5 +100,5 @@ func _die():
 
 func _on_area_de_ataque_body_entered(body: Node2D) -> void:
 	if _ataque_ativo and body.is_in_group("inimigos"):
-		body.take_damage(20)
+		body.take_damage(_dano_ataque, global_position)
 	return
