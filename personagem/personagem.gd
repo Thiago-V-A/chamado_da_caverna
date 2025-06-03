@@ -10,22 +10,39 @@ var _ataque_ativo := false
 
 @export var _velocidade_de_movimento: float = 128
 @export var _animador_do_personagem: AnimationPlayer
+@export var _vida_atual_sprite: Sprite2D
 @export var _temporizador_de_acoes: Timer
 @export var _area_de_ataque: Area2D
 @export var _texto_arma_atual: Label
+@export var SomAtaqueEspada1:AudioStreamPlayer
+@export var SomAtaqueEspada2:AudioStreamPlayer
+@export var _som_correndo_na_caverna: AudioStreamPlayer
+
 var target: CharacterBody2D = null
 
+# Exemplo de código para ancorar no canto esquerdo da tela
+func _ready():
+	_vida_atual_sprite.position = Vector2(35, 10) # 20 pixels da esquerda e de cima
+
 func _process(_delta: float) -> void:
+	if esta_correndo():
+		if !_som_correndo_na_caverna.playing:
+			_som_correndo_na_caverna.play()
+	else:
+		if _som_correndo_na_caverna.playing:
+			_som_correndo_na_caverna.stop()
+
+	_controleDeVida()
 	var direcao = Input.get_vector(
 		"mover_esquerda", "mover_direita", "mover_cima", "mover_baixo"
 	)
 	velocity = direcao * _velocidade_de_movimento
 	move_and_slide()
-	
 	_sufixo_da_animacao = _sufixo_do_personagem()
 	_definir_arma_atual()
 	_atacar()
 	_animar()
+	
 
 func _sufixo_do_personagem () -> String:  
 	var _acao_horizontal: float = Input.get_axis("mover_esquerda", "mover_direita") 
@@ -55,18 +72,20 @@ func _definir_arma_atual() -> void:
 		_arma_atual ='picareta'
 	_texto_arma_atual.text = _arma_atual
 
-
 func _atacar(body = null) -> void:
 	if Input.is_action_just_pressed("atacar") and _pode_atacar:
 		_animador_do_personagem.play("atacando_" + _arma_atual + _sufixo_da_animacao)
+		if randf() <= 0.5:
+			SomAtaqueEspada1.play()
+		else:
+			SomAtaqueEspada2.play()
+
 		_ataque_ativo = true  # Ativa o modo ataque
 		_temporizador_de_acoes.start(0.4)
 		_pode_atacar = false
 		set_process(false)
-
 		await get_tree().create_timer(0.2).timeout  # tempo do impacto
 		_ataque_ativo = false  # Desativa ataque após impacto
-
 
 func _animar() -> void:
 	if _pode_atacar == false:
@@ -97,8 +116,17 @@ func _die():
 	set_physics_process(false)
 	queue_free()
 
+func _controleDeVida():
+	var vida_percentual = clamp(_vida_atual, 0, 100)
+	var frame = int((100 - vida_percentual) / 10)
+	_vida_atual_sprite.frame = frame
 
+		
+		
 func _on_area_de_ataque_body_entered(body: Node2D) -> void:
 	if _ataque_ativo and body.is_in_group("inimigos"):
 		body.take_damage(_dano_ataque, global_position)
 	return
+
+func esta_correndo() -> bool:
+	return velocity.length() > 0.1

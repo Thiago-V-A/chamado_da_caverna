@@ -1,9 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://bsb2bd8y5r8wx"]
+[gd_scene load_steps=29 format=3 uid="uid://bsb2bd8y5r8wx"]
 
 [ext_resource type="Script" uid="uid://cw2ulu4u7xxej" path="res://personagem/personagem.gd" id="1_eg6rg"]
 [ext_resource type="Texture2D" uid="uid://cat7j6bxywtyl" path="res://personagem/acoes_padrao.png" id="2_eg6rg"]
 [ext_resource type="Texture2D" uid="uid://bnhvm2tuu0xps" path="res://personagem/acoes.png" id="3_7syfo"]
 [ext_resource type="Script" uid="uid://fyq0yeinf1lj" path="res://personagem/area_de_ataque.gd" id="4_defmj"]
+[ext_resource type="Texture2D" uid="uid://crb1ijfgahwge" path="res://personagem/Vida-Assets.png" id="5_u10kq"]
+[ext_resource type="AudioStream" uid="uid://dfhno7mtljrbs" path="res://Sons/SomAtaqueEspada1.mp3" id="6_oqhke"]
+[ext_resource type="AudioStream" uid="uid://xhiaa5xdox1t" path="res://Sons/SomAtaqueEspada2.mp3" id="6_rsmhl"]
 
 [sub_resource type="Animation" id="Animation_7syfo"]
 length = 0.001
@@ -1266,15 +1269,18 @@ font_size = 8
 radius = 2.0
 height = 10.0
 
-[node name="Personagem" type="CharacterBody2D" node_paths=PackedStringArray("_animador_do_personagem", "_temporizador_de_acoes", "_area_de_ataque", "_texto_arma_atual") groups=["player"]]
+[node name="Personagem" type="CharacterBody2D" node_paths=PackedStringArray("_animador_do_personagem", "_vida_atual_sprite", "_temporizador_de_acoes", "_area_de_ataque", "_texto_arma_atual", "SomAtaqueEspada1", "SomAtaqueEspada2") groups=["player"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_eg6rg")
 _velocidade_de_movimento = 96.0
 _animador_do_personagem = NodePath("AnimationPlayer")
+_vida_atual_sprite = NodePath("CanvasLayer/Vida")
 _temporizador_de_acoes = NodePath("TemporazidaroDeAcoes")
 _area_de_ataque = NodePath("AreaDeAtaque")
 _texto_arma_atual = NodePath("Label")
+SomAtaqueEspada1 = NodePath("Node/SomAtaqueEspada1")
+SomAtaqueEspada2 = NodePath("Node/SomAtaqueEspada2")
 
 [node name="Textura" type="Sprite2D" parent="."]
 light_mask = 7
@@ -1330,6 +1336,21 @@ show_behind_parent = true
 position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_defmj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Vida" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(-127, -62)
+texture = ExtResource("5_u10kq")
+hframes = 10
+
+[node name="Node" type="Node" parent="."]
+
+[node name="SomAtaqueEspada1" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("6_oqhke")
+
+[node name="SomAtaqueEspada2" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("6_rsmhl")
 
 [connection signal="timeout" from="TemporazidaroDeAcoes" to="." method="_on_temporazidaro_de_acoes_timeout"]
 [connection signal="body_entered" from="AreaDeAtaque" to="." method="_on_area_de_ataque_body_entered"]

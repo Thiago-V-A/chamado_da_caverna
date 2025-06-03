@@ -1,5 +1,9 @@
-TileMap
+AudioStreamPlayer
+Node
+CanvasLayer
 Sprite2D
+AnimatedSprite2D
+TileMap
 CollisionShape2D
 CharacterBody2D
 Area2D
@@ -8,7 +12,3 @@ TileMapLayer
 Node2D
 StaticBody2D
 NavigationRegion2D
-Timer
-Polygon2D
-AnimationPlayer
-Node
