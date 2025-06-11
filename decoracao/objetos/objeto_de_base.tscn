@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c4na2lh6cx8m3"]
 
-[ext_resource type="Script" uid="uid://ba0qc8vvktjhc" path="res://decoracao/objetos/objeto_de_base.gd" id="1_as3gh"]
+[ext_resource type="Script" path="res://decoracao/objetos/objeto_de_base.gd" id="1_as3gh"]
 
 [sub_resource type="Animation" id="Animation_7sku5"]
 length = 0.001
