@@ -1,0 +1,123 @@
+[gd_scene load_steps=15 format=3 uid="uid://ci3bkwhs1syr6"]
+
+[ext_resource type="Script" uid="uid://d1pr0mlb1jlv8" path="res://interface/tela_de_game_over.gd" id="1_4bk1q"]
+[ext_resource type="PackedScene" uid="uid://bln4ubpwfummd" path="res://terreno/terreno_nive_1.tscn" id="1_ciwks"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8xxke"]
+font_size = 32
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8xxke"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ciwks"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4bk1q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d7f4q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wxn10"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1831l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a5clk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcy70"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s50bn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ren07"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqw77"]
+
+[node name="TelaDeGameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4bk1q")
+
+[node name="Terreno" parent="." instance=ExtResource("1_ciwks")]
+position = Vector2(-194, -249)
+
+[node name="Mascara" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -91.5
+offset_top = 32.0
+offset_right = 91.5
+offset_bottom = 77.0
+grow_horizontal = 2
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_8xxke")
+
+[node name="VContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -11.5
+offset_right = 59.0
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 3
+
+[node name="Reiniciar" type="Button" parent="VContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8xxke")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ciwks")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bk1q")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_d7f4q")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_wxn10")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_1831l")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a5clk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_tcy70")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s50bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ren07")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kqw77")
+text = "Reiniciar"
+flat = true
+
+[node name="Sair" type="Button" parent="VContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8xxke")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ciwks")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bk1q")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_d7f4q")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_wxn10")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_1831l")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a5clk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_tcy70")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s50bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ren07")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kqw77")
+text = "Sair
+"
+flat = true
+
+[connection signal="pressed" from="VContainer/Reiniciar" to="." method="_on_reiniciar_pressed"]
+[connection signal="pressed" from="VContainer/Sair" to="." method="_on_sair_pressed"]

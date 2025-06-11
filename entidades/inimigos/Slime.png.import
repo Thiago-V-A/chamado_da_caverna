@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vsmi4bqy22il"
-path="res://.godot/imported/Outdoor_Decor_Free.png-3227adb091efe13671bcfd113ddcb4cd.ctex"
+uid="uid://b5lrfc14uxqib"
+path="res://.godot/imported/Slime.png-d2091347477345b6c271169973edd9f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://terreno/tiles/Outdoor_Decor_Free.png"
-dest_files=["res://.godot/imported/Outdoor_Decor_Free.png-3227adb091efe13671bcfd113ddcb4cd.ctex"]
+source_file="res://entidades/inimigos/Slime.png"
+dest_files=["res://.godot/imported/Slime.png-d2091347477345b6c271169973edd9f4.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dhss6ufu8kjtl"]
 
 [ext_resource type="PackedScene" uid="uid://c4na2lh6cx8m3" path="res://decoracao/objetos/objeto_de_base.tscn" id="1_8wq0p"]
-[ext_resource type="Texture2D" uid="uid://vsmi4bqy22il" path="res://terreno/tiles/Outdoor_Decor_Free.png" id="2_m8ybn"]
+[ext_resource type="Texture2D" uid="uid://vsmi4bqy22il" path="res://decoracao/tiles/Outdoor_Decor_Free.png" id="2_m8ybn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8ybn"]
 radius = 9.0
@@ -10,7 +10,7 @@ radius = 9.0
 radius = 8.0
 
 [node name="pedra" instance=ExtResource("1_8wq0p")]
-position = Vector2(0, 0)
+objeto_que_destroi = "picareta"
 
 [node name="Colisao" parent="." index="0"]
 position = Vector2(0, -4)

@@ -1,15 +1,25 @@
 extends CharacterBody2D
 
+var esta_vivo: bool = true
 var _arma_atual: String = "espada"
 var _sufixo_da_animacao: String = "_baixo"
 var _pode_atacar: bool = true
+
+var icones_armas: Dictionary = {
+	"espada": preload("res://interface/armas/espada.png"),
+	"picareta": preload("res://interface/armas/picareta.png"),
+	"machado": preload("res://interface/armas/machado.png"),
+	"enxada": preload("res://interface/armas/enxada.png"),
+}
 
 @export var _velocidade_de_movimento: float = 128
 @export var _animador_do_personagem: AnimationPlayer
 @export var _temporizador_de_acoes: Timer
 @export var _area_de_ataque: Area2D
-@export var _texto_arma_atual: Label
-var target: CharacterBody2D = null
+
+@export var _vida: int = 10
+
+@onready var icone_hud: TextureRect = $CanvasLayer/IconeArmaHUD
 
 func _process(_delta: float) -> void:
 	var direcao = Input.get_vector(
@@ -44,12 +54,23 @@ func _sufixo_do_personagem () -> String:
 	return _sufixo_da_animacao
 
 func _definir_arma_atual() -> void:
+	var arma_foi_trocada: bool = false
+
 	if Input.is_action_just_pressed("espada"):
 		_arma_atual = "espada"
+		arma_foi_trocada = true
+	elif Input.is_action_just_pressed("picareta"):
+		_arma_atual = "picareta"
+		arma_foi_trocada = true
+	elif Input.is_action_just_pressed("machado"):
+		_arma_atual = "machado"
+		arma_foi_trocada = true
+	elif Input.is_action_just_pressed("enxada"):
+		_arma_atual = "enxada"
+		arma_foi_trocada = true
 	
-	if Input.is_action_just_pressed("picareta"):
-		_arma_atual ='picareta'
-	_texto_arma_atual.text = _arma_atual
+	if arma_foi_trocada:
+		_atualizar_icone_arma()
 
 
 func _atacar() -> void:
@@ -73,3 +94,41 @@ func _animar() -> void:
 func _on_temporazidaro_de_acoes_timeout() -> void:
 	set_process(true)
 	_pode_atacar = true
+
+
+func _on_area_de_ataque_area_entered(_area: Area2D) -> void:
+	if _area.is_in_group("area_de_dano"):
+		_area.get_parent().perdendo_vida(randi_range(1, 5))
+		return
+	
+	if _area.is_in_group("objetos"):
+		print(_arma_atual)
+		if _arma_atual == _area.objeto_que_destroi:
+			_area.perdendo_vida(randi_range(1, 5))
+		
+func perdendo_vida(_dano_recebido: int) -> void:
+	if esta_vivo == false:
+		return
+	
+	_vida -= _dano_recebido
+	if _vida > 0:
+		$AnimadorVida.play("perdendo_vida")
+		return
+		
+	_kill()
+
+func _kill() -> void:
+	_temporizador_de_acoes.stop()
+	set_process(false)
+	esta_vivo = false
+	_animador_do_personagem.play("morte")
+	
+func _atualizar_icone_arma() -> void:
+	icone_hud.texture = icones_armas[_arma_atual]
+
+
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
+	if _anim_name == "morte":
+		get_tree().change_scene_to_file("res://interface/tela_de_game_over.tscn")
+		$ColisaoPersonagem.set_deferred("disabled", true)
+		icone_hud.hide()

@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://djhw86rjks5er"]
+
+[ext_resource type="Script" uid="uid://51cli41n4p5w" path="res://entidades/entidade_de_base.gd" id="1_jvei6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jvei6"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1odim"]
+radius = 48.0
+
+[sub_resource type="Animation" id="Animation_jvei6"]
+resource_name = "perdendo_vida"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.6), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1odim"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0bgub"]
+_data = {
+&"RESET": SubResource("Animation_1odim"),
+&"perdendo_vida": SubResource("Animation_jvei6")
+}
+
+[node name="EntidadeDeBase" type="CharacterBody2D" node_paths=PackedStringArray("_tempo_de_caminhada", "_tempor_de_corrida", "_animador", "_textura", "_tempo_de_ataque")]
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_jvei6")
+_tempo_de_caminhada = NodePath("TempoDeCaminhada")
+_tempor_de_corrida = NodePath("TempoDeCorrida")
+_animador = NodePath("AnimationPlayer")
+_textura = NodePath("Textura")
+_tempo_de_ataque = NodePath("TempoDeAtaque")
+
+[node name="Textura" type="Sprite2D" parent="."]
+
+[node name="ColisaoFisica" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="TempoDeCaminhada" type="Timer" parent="."]
+one_shot = true
+
+[node name="AreaDeDano" type="Area2D" parent="." groups=["area_de_dano"]]
+
+[node name="Colisor" type="CollisionShape2D" parent="AreaDeDano"]
+shape = SubResource("CircleShape2D_jvei6")
+
+[node name="TempoDeCorrida" type="Timer" parent="."]
+one_shot = true
+
+[node name="AreaDeDeteccao" type="Area2D" parent="."]
+
+[node name="Colisor" type="CollisionShape2D" parent="AreaDeDeteccao"]
+shape = SubResource("CircleShape2D_1odim")
+
+[node name="TempoDeAtaque" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimadorVida" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0bgub")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="TempoDeCaminhada" to="." method="_on_tempo_de_caminhada_timeout"]
+[connection signal="timeout" from="TempoDeCorrida" to="." method="_on_tempo_de_corrida_timeout"]
+[connection signal="body_entered" from="AreaDeDeteccao" to="." method="_on_area_de_deteccao_body_entered"]
+[connection signal="body_exited" from="AreaDeDeteccao" to="." method="_on_area_de_deteccao_body_exited"]
+[connection signal="timeout" from="TempoDeAtaque" to="." method="_on_tempo_de_ataque_timeout"]
