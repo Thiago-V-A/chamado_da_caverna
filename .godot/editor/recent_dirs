@@ -1,9 +1,10 @@
+res://decoracao/objetos
+res://nivel
 res://interface
 res://terreno
 res://personagem
 res://entidades/inimigos
 res://entidades
-res://decoracao/objetos
 res://entidades/animais/Sheep
 res://entidades/animais/Pig
 res://entidades/animais/Cow
@@ -12,5 +13,4 @@ res://decoracao
 /home/thiago/jogo/gravação
 res://Inimigos/SlimeGreen
 res://Inimigos
-res://nivel
 res://
