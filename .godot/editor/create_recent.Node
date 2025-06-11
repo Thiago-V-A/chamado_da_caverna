@@ -1,12 +1,12 @@
+CollisionShape2D
+Area2D
 AudioStreamPlayer
 Node
 CanvasLayer
 Sprite2D
 AnimatedSprite2D
 TileMap
-CollisionShape2D
 CharacterBody2D
-Area2D
 AudioStreamPlayer2D
 TileMapLayer
 Node2D

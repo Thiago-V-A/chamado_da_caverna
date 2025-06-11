@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dt7b32o5fknfk"]
+[gd_scene load_steps=16 format=3 uid="uid://dt7b32o5fknfk"]
 
 [ext_resource type="Script" uid="uid://bjxd2iacp7e12" path="res://Inimigos/SlimeGreen/slime_green.gd" id="1_coejx"]
 [ext_resource type="Texture2D" uid="uid://b4sy6ufr8gqu1" path="res://Inimigos/SlimeGreen/slime-green.png" id="1_yxl3o"]
 [ext_resource type="Script" uid="uid://dog4i35xnjiel" path="res://Inimigos/SlimeGreen/area_ataque.gd" id="3_rnmtb"]
+[ext_resource type="AudioStream" uid="uid://mrst7n5om8oy" path="res://Sons/SomPuloSlime.mp3" id="4_104at"]
+[ext_resource type="AudioStream" uid="uid://bp7b6f4bnmp8x" path="res://Sons/SomDanoSlime.mp3" id="5_jkoat"]
+[ext_resource type="Script" uid="uid://57nnk0ddh0ui" path="res://Inimigos/SlimeGreen/visao.gd" id="6_01gas"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_coejx"]
 radius = 7.0
@@ -42,7 +45,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_jkoat"]
 resource_name = "morrendo"
 length = 0.8
-loop_mode = 2
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -59,6 +61,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_umw0p"]
 resource_name = "morto"
+loop_mode = 1
 step = 1.0
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -67,10 +70,10 @@ tracks/0/path = NodePath("Skin:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [23, 23]
+"values": [23]
 }
 
 [sub_resource type="Animation" id="Animation_104at"]
@@ -101,9 +104,14 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_104at"]
 
-[node name="SlimeGreen" type="CharacterBody2D" groups=["inimigos", "slimes"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_jkoat"]
+radius = 213.115
+
+[node name="SlimeGreen" type="CharacterBody2D" node_paths=PackedStringArray("_som_slime_correndo", "_som_slime_tomando_dano") groups=["inimigos", "slimes"]]
 position = Vector2(0, -7)
 script = ExtResource("1_coejx")
+_som_slime_correndo = NodePath("Node/SomPulando")
+_som_slime_tomando_dano = NodePath("Node/SomDanoRecebido")
 
 [node name="Skin" type="Sprite2D" parent="."]
 texture = ExtResource("1_yxl3o")
@@ -133,5 +141,23 @@ script = ExtResource("3_rnmtb")
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_104at")
 
+[node name="Node" type="Node" parent="."]
+
+[node name="SomPulando" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("4_104at")
+
+[node name="SomDanoRecebido" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("5_jkoat")
+
+[node name="Visao" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("6_01gas")
+
+[node name="VisaoCollision" type="CollisionShape2D" parent="Visao"]
+visibility_layer = 2
+shape = SubResource("CircleShape2D_jkoat")
+
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
 [connection signal="body_entered" from="AreaAtaque" to="AreaAtaque" method="_on_body_entered"]
+[connection signal="body_entered" from="Visao" to="." method="_on_visao_body_entered"]

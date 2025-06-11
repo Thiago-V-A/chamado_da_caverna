@@ -21,8 +21,13 @@ _som_correndo_na_caverna = NodePath("CorrendoNaCaverna")
 stream = ExtResource("3_4yion")
 
 [node name="SlimeGreen" parent="." instance=ExtResource("3_aev2q")]
-position = Vector2(182, 815)
+position = Vector2(60, 55)
 collision_layer = 2
+speed = 60
+attack_damage = 10
+max_health = 30
+attack_range = 0
+attack_cooldown = 1.5
 
 [node name="SomClimaCaverna" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_g3hnt")

@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var max_health := 30
 @export var attack_range := 0
 @export var attack_cooldown := 1.5
+@export var _som_slime_correndo: AudioStreamPlayer
+@export var _som_slime_tomando_dano: AudioStreamPlayer
 
 @onready var _collider: CollisionShape2D = $Colisao
 @onready var _area_ataque = $AreaAtaque/ColisaoDeAtaque
@@ -21,7 +23,8 @@ var attack_timer := 0.0
 var is_dead := false
 var is_stunned := false
 var stun_duration := 0.3  # segundos de interrupção
-var _wait_time = 2
+var _wait_time = 2;
+var visivel = false;
 
 func _ready():
 	# Pega a instancia de player
@@ -40,13 +43,17 @@ func _ready():
 	multiply_timer.timeout.connect(_on_multiply_timeout)
 
 func _physics_process(delta):
+	z_index = 2
 	# Verifica a morte do slime.
 	if is_dead:
 		_area_ataque.set_deferred("disabled", true)
 		_collider.set_deferred("disabled", true)
 		velocity = Vector2.ZERO
 		sprite.play("morrendo")
-		await get_tree().create_timer(10).timeout
+		await get_tree().create_timer(1.0).timeout
+		z_index = 1
+		sprite.seek(sprite.current_animation_length, true)
+		await get_tree().create_timer(10.0).timeout
 		set_physics_process(false)
 		queue_free()
 	else:
@@ -63,17 +70,16 @@ func _physics_process(delta):
 			await get_tree().create_timer(0.5).timeout
 			sprite.play("parado")
 			is_stunned = false
-
 		attack_timer -= delta
 		var distance = position.distance_to(target.position)
 		if distance <= attack_range:
 			if attack_timer <= 0:
 				_attack(target)
 		else:
-			_chase_target(delta)
-
-func _on_jump_timer_timeout() -> void:
-	return
+			if visivel:
+				_chase_target(delta)
+				if !_som_slime_correndo.playing:
+					_som_slime_correndo.play()
 
 func _get_direction() -> Vector2:
 	var direction = (target.position - position).normalized()
@@ -91,10 +97,9 @@ func _attack(player):
 func take_damage(amount: int, attacker_position: Vector2):
 	if is_dead:
 		return
-
+	_som_slime_tomando_dano.play();
 	current_health -= amount
 	_piscar_dano()
-
 	# knockback
 	var direction = (position - attacker_position).normalized()
 	knockback_velocity = direction * 150
@@ -123,7 +128,16 @@ func _on_multiply_timeout():
 	new_slime.position = position + Vector2(20, 0) # ligeiramente ao lado
 	get_parent().add_child(new_slime)
 
-
+func _player_is_visivel(retorno):
+	visivel = retorno
 func _die():
 	is_dead = true
 	
+
+
+func _on_visao_body_entered(player: Node2D) -> void:
+	if player.is_in_group("player"):
+		_player_is_visivel(true);
+		print('O player está visivel para o slime');
+	else:
+		return;

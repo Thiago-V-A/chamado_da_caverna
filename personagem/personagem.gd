@@ -25,6 +25,7 @@ func _ready():
 	_vida_atual_sprite.position = Vector2(35, 10) # 20 pixels da esquerda e de cima
 
 func _process(_delta: float) -> void:
+	z_index = 2;
 	if esta_correndo():
 		if !_som_correndo_na_caverna.playing:
 			_som_correndo_na_caverna.play()
