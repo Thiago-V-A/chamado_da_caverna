@@ -3,15 +3,17 @@ extends CharacterBody2D
 var direcao: Vector2
 var esta_correndo: bool = false
 var esta_atacando: bool = false
-
+var morto: bool = false
 var personagem: CharacterBody2D
-# Adicione no início do script
-var movimento_travado: bool = false
+# Adicione esta variável para controlar o estado de perseguição
+var modo_perseguicao: bool = false
+var alvo_perseguicao: Node2D = null
 @export var _tempo_de_caminhada: Timer
 @export var _tempor_de_corrida: Timer
 @export var _animador: AnimationPlayer
 @export var _textura: Sprite2D
 @export var _tempo_de_ataque: Timer
+
 @export var _velocidade_de_movimento_normal: float = 32
 @export var _veolicdade_de_movimento_correndo: float = 64
 @export var _vida: int = 10
@@ -19,30 +21,55 @@ var movimento_travado: bool = false
 
 func _ready() -> void:
 	direcao = retornar_direcao_aleatoria()
-	_tempo_de_caminhada.start(5.00)
-	add_to_group("entity")
+	_tempo_de_caminhada.start(100.00)
+	
+	# Se não for agressivo, desativa a detecção
+	if !_entidade_agressiva:
+		$AreaDeDeteccao.monitoring = false
+		$AreaDeDeteccao.monitorable = false
+
 
 func _physics_process(delta: float) -> void:
-	if movimento_travado:
-		velocity = Vector2.ZERO
-		_animador.play("parado")
+	# Modo perseguição especial (para tutorial)
+	if modo_perseguicao && is_instance_valid(alvo_perseguicao):
+		var distancia: float = global_position.distance_to(alvo_perseguicao.global_position)
+		
+		# Para quando chegar perto do alvo
+		if distancia < 20:
+			velocity = Vector2.ZERO
+			_animador.play("parado")
+		else:
+			direcao = global_position.direction_to(alvo_perseguicao.global_position)
+			velocity = _velocidade_de_movimento_normal * direcao
+		
+		move_and_slide()
+		_animar()
 		return
+		
+	# Comportamento normal para mobs agressivos
+	if _entidade_agressiva && is_instance_valid(personagem) && personagem.esta_vivo:
+		var distancia: float = global_position.distance_to(personagem.global_position)
+		
+		# Sistema de perseguição/ataque
+		if distancia < 150:  # Raio de detecção
+			if distancia < 20:  # Distância de ataque
+				if esta_atacando == false:
+					personagem.perdendo_vida(randi_range(1, 5))
+					esta_atacando = true
+					_tempo_de_ataque.start()
+				velocity = Vector2.ZERO
+			else:
+				direcao = global_position.direction_to(personagem.global_position)
+				velocity = _velocidade_de_movimento_normal * direcao
+			
+			move_and_slide()
+			_animar()
+			return
+	
+	# Comportamento padrão (caminhada aleatória)
 	velocity = _velocidade_de_movimento_normal * direcao
 	if esta_correndo:
 		velocity = _veolicdade_de_movimento_correndo * direcao
-		
-	if is_instance_valid(personagem) and personagem.esta_vivo == true:
-		var distancia: float = global_position.distance_to(personagem.global_position)
-		if distancia < 16:
-			if esta_atacando == false:
-				personagem.perdendo_vida(randi_range(1, 5))
-				esta_atacando = true
-				_tempo_de_ataque.start()
-			
-			return 
-		
-		direcao = global_position.direction_to(personagem.global_position)
-		velocity = _velocidade_de_movimento_normal * direcao
 		
 	move_and_slide()
 	_bounce()
@@ -102,6 +129,7 @@ func perdendo_vida(_dano_recebido: int) -> void:
 	_kill()
 	
 func _kill() -> void:
+	morto = true
 	if _entidade_agressiva:
 		set_physics_process(false)
 		_animador.play("morrendo")
@@ -142,16 +170,10 @@ func _on_tempo_de_ataque_timeout() -> void:
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	if _anim_name == "morrendo":
 		queue_free()
-
-# Adicione estas funções na entidade básica
-func travar_movimento():
-	movimento_travado = true
+		
+func iniciar_perseguicao_tutorial(alvo: Node2D):
+	modo_perseguicao = true
+	alvo_perseguicao = alvo
 	_tempo_de_caminhada.stop()
-	_tempor_de_corrida.stop()
-	_tempo_de_ataque.stop()
 	esta_correndo = false
 	esta_atacando = false
-
-func destravar_movimento():
-	movimento_travado = false
-	_tempo_de_caminhada.start(5.0)

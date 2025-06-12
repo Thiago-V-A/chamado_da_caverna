@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://cty4cmfuoiqt7"]
+[gd_scene load_steps=48 format=4 uid="uid://cty4cmfuoiqt7"]
 
 [ext_resource type="Texture2D" uid="uid://cn8a6c2y7d17k" path="res://terreno/tiles/Beach_Tile.png" id="1_jjh8k"]
 [ext_resource type="PackedScene" uid="uid://bsb2bd8y5r8wx" path="res://personagem/personagem.tscn" id="1_mo1yv"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cjycer7dinyjj" path="res://entidades/animais/Pig/porco.tscn" id="11_c0iee"]
 [ext_resource type="PackedScene" uid="uid://ot4ke2anlo0n" path="res://entidades/inimigos/esqueleto.tscn" id="12_xdaky"]
 [ext_resource type="PackedScene" uid="uid://bkf8hvbs74sr0" path="res://entidades/inimigos/slime_verde.tscn" id="13_ede0s"]
+[ext_resource type="Script" uid="uid://cidjgnh6ktky" path="res://entidades/inimigos/slime_tutorial.gd" id="19_pbjpe"]
 [ext_resource type="Script" uid="uid://ddw3ejwunlx8r" path="res://nivel/tutorial_manager.gd" id="23_le27y"]
 [ext_resource type="Texture2D" uid="uid://bleeu33gabl64" path="res://nivel/wasd.png" id="24_c078e"]
 [ext_resource type="FontFile" uid="uid://51ogkelvqanq" path="res://decoracao/objetos/SNAP____.TTF" id="25_uhbto"]
@@ -398,7 +399,7 @@ tile_set = SubResource("TileSet_2raon")
 y_sort_enabled = true
 
 [node name="Personagem" parent="YSort" instance=ExtResource("1_mo1yv")]
-position = Vector2(118, 259)
+position = Vector2(432, 256)
 
 [node name="arvore" parent="YSort" instance=ExtResource("3_0thrb")]
 position = Vector2(109, 82)
@@ -433,14 +434,8 @@ position = Vector2(473, 278)
 [node name="arvore_menor5" parent="YSort" instance=ExtResource("4_kvd15")]
 position = Vector2(408, 252)
 
-[node name="pedra" parent="YSort" instance=ExtResource("5_3j3pl")]
-position = Vector2(45, 208)
-
 [node name="pedra2" parent="YSort" instance=ExtResource("5_3j3pl")]
-position = Vector2(129, 225)
-
-[node name="pedra3" parent="YSort" instance=ExtResource("5_3j3pl")]
-position = Vector2(163, 283)
+position = Vector2(456, 297)
 
 [node name="bau" parent="YSort" instance=ExtResource("6_upjwp")]
 position = Vector2(461, 222)
@@ -452,7 +447,7 @@ position = Vector2(335, 343)
 position = Vector2(461, 187)
 
 [node name="Slime" parent="YSort" instance=ExtResource("9_w7vcq")]
-position = Vector2(361, 250)
+position = Vector2(301, 233)
 
 [node name="Ovelha" parent="YSort" instance=ExtResource("10_nrwmf")]
 position = Vector2(279, 126)
@@ -461,19 +456,32 @@ position = Vector2(279, 126)
 position = Vector2(222, 130)
 
 [node name="Esqueleto" parent="YSort" instance=ExtResource("12_xdaky")]
-position = Vector2(165, 235)
+position = Vector2(192, 223)
 
 [node name="Slime2" parent="YSort" instance=ExtResource("13_ede0s")]
 position = Vector2(235, 296)
-_veolicdade_de_movimento_correndo = 64.0
-_vida = 10
 
 [node name="TutorialManager" type="Node2D" parent="."]
 script = ExtResource("23_le27y")
 
+[node name="pedra3" parent="TutorialManager" instance=ExtResource("5_3j3pl")]
+position = Vector2(303, 303)
+objeto_que_destroi = ""
+
+[node name="pedra_tutorial" parent="TutorialManager" instance=ExtResource("5_3j3pl")]
+position = Vector2(158, 284)
+objeto_que_destroi = ""
+
+[node name="Slime_tutorial" parent="TutorialManager" instance=ExtResource("9_w7vcq")]
+position = Vector2(370, 244)
+script = ExtResource("19_pbjpe")
+_velocidade_de_movimento_normal = 32.0
+_entidade_agressiva = false
+
 [node name="CanvasLayer" type="CanvasLayer" parent="TutorialManager"]
 
 [node name="awsd" type="TextureRect" parent="TutorialManager/CanvasLayer"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("24_c078e")

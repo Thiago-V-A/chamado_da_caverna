@@ -1,5 +1,6 @@
 extends CharacterBody2D
-
+# Adicione esta variável
+var movimento_travado: bool = false
 var esta_vivo: bool = true
 var _arma_atual: String = "espada"
 var _sufixo_da_animacao: String = "_baixo"
@@ -22,11 +23,12 @@ var icones_armas: Dictionary = {
 @onready var icone_hud: TextureRect = $CanvasLayer/IconeArmaHUD
 
 func _process(_delta: float) -> void:
-	var direcao = Input.get_vector(
-		"mover_esquerda", "mover_direita", "mover_cima", "mover_baixo"
-	)
-	velocity = direcao * _velocidade_de_movimento
-	move_and_slide()
+	if not movimento_travado:
+		var direcao = Input.get_vector(
+			"mover_esquerda", "mover_direita", "mover_cima", "mover_baixo"
+		)
+		velocity = direcao * _velocidade_de_movimento
+		move_and_slide()
 	
 	_sufixo_da_animacao = _sufixo_do_personagem()
 	_definir_arma_atual()
@@ -132,3 +134,11 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 		get_tree().change_scene_to_file("res://interface/tela_de_game_over.tscn")
 		$ColisaoPersonagem.set_deferred("disabled", true)
 		icone_hud.hide()
+		
+# Adicione estas funções novas
+func travar_movimento():
+	movimento_travado = true
+	_animador_do_personagem.play("parado" + _sufixo_da_animacao)
+	
+func destravar_movimento():
+	movimento_travado = false
