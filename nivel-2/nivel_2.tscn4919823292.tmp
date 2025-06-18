@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dusk470l07qbk"]
+
+[ext_resource type="PackedScene" uid="uid://btcp3due1cynf" path="res://nivel-2/terreno_manager.tscn" id="1_namkp"]
+[ext_resource type="PackedScene" uid="uid://bsb2bd8y5r8wx" path="res://personagem/personagem.tscn" id="2_aev2q"]
+[ext_resource type="PackedScene" uid="uid://dt7b32o5fknfk" path="res://Inimigos/SlimeGreen/slime-green.tscn" id="3_aev2q"]
+
+[node name="nivel-2" type="Node2D"]
+
+[node name="TerrenoManager" parent="." instance=ExtResource("1_namkp")]
+
+[node name="Personagem" parent="." instance=ExtResource("2_aev2q")]
+position = Vector2(65, -33)
+collision_mask = 7
+
+[node name="CameraPesonagem" type="Camera2D" parent="Personagem"]
+
+[node name="SlimeGreen" parent="." instance=ExtResource("3_aev2q")]
+position = Vector2(60, 55)
+collision_layer = 2

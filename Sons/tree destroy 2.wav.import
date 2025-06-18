@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://du8x11hoqgab1"
+path="res://.godot/imported/tree destroy 2.wav-4993084c07cdf83924eef7f1e8f15f0c.sample"
+
+[deps]
+
+source_file="res://Sons/tree destroy 2.wav"
+dest_files=["res://.godot/imported/tree destroy 2.wav-4993084c07cdf83924eef7f1e8f15f0c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

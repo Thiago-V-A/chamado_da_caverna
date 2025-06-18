@@ -10,6 +10,7 @@ radius = 8.0
 size = Vector2(14, 7)
 
 [node name="bau" instance=ExtResource("1_vbw6d")]
+_vida = 15
 
 [node name="Colisao" parent="." index="0"]
 position = Vector2(0, -5)

@@ -12,19 +12,37 @@ var icones_armas: Dictionary = {
 	"enxada": preload("res://interface/armas/enxada.png"),
 }
 
+const TEXTURA_CORACAO_CHEIO = preload("res://interface/vida/coracao_cheio.PNG")
+const TEXTURA_CORACAO_MEIO = preload("res://interface/vida/coracao_meio.PNG")
+const TEXTURA_CORACAO_VAZIO = preload("res://interface/vida/coracao_vazio.PNG")
+
+@export var _vida_maxima: int = 10 
+
+
 @export var _velocidade_de_movimento: float = 128
 @export var _animador_do_personagem: AnimationPlayer
 @export var _temporizador_de_acoes: Timer
 @export var _area_de_ataque: Area2D
 
-@export var _vida: int = 10
+@export var _vida: int = 10:
+	set(novo_valor):
+		_vida = clamp(novo_valor, 0, _vida_maxima)
+		if _container_coracoes:
+			_atualizar_vida_hud()
 
 @onready var icone_hud: TextureRect = $CanvasLayer/IconeArmaHUD
+@onready var _container_coracoes: HBoxContainer = $CanvasLayer/ContainerCoracoes
+
+
+func _ready() -> void:
+	self._vida = _vida_maxima
+	_atualizar_icone_arma()
 
 func _process(_delta: float) -> void:
 	var direcao = Input.get_vector(
 		"mover_esquerda", "mover_direita", "mover_cima", "mover_baixo"
 	)
+	
 	velocity = direcao * _velocidade_de_movimento
 	move_and_slide()
 	
@@ -103,13 +121,16 @@ func _on_area_de_ataque_area_entered(_area: Area2D) -> void:
 	
 	if _area.is_in_group("objetos"):
 		print(_arma_atual)
+		print(_area.objeto_que_destroi )
 		if _arma_atual == _area.objeto_que_destroi:
 			_area.perdendo_vida(randi_range(1, 5))
 		
 func perdendo_vida(_dano_recebido: int) -> void:
 	if esta_vivo == false:
 		return
-	
+		
+	self._vida -= _dano_recebido
+
 	_vida -= _dano_recebido
 	if _vida > 0:
 		$AnimadorVida.play("perdendo_vida")
@@ -132,3 +153,28 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 		get_tree().change_scene_to_file("res://interface/tela_de_game_over.tscn")
 		$ColisaoPersonagem.set_deferred("disabled", true)
 		icone_hud.hide()
+		
+func _atualizar_vida_hud() -> void:
+	for coracao in _container_coracoes.get_children():
+		coracao.queue_free()
+
+	var coracoes_cheios = _vida / 2
+	var tem_meio_coracao = _vida % 2 == 1
+	var total_de_slots_coracao = _vida_maxima / 2
+
+	for i in coracoes_cheios:
+		var novo_coracao = TextureRect.new()
+		novo_coracao.texture = TEXTURA_CORACAO_CHEIO
+		_container_coracoes.add_child(novo_coracao)
+	
+	if tem_meio_coracao:
+		var novo_coracao = TextureRect.new()
+		novo_coracao.texture = TEXTURA_CORACAO_MEIO
+		_container_coracoes.add_child(novo_coracao)
+
+	var coracoes_mostrados = coracoes_cheios + (1 if tem_meio_coracao else 0)
+	var coracoes_vazios = total_de_slots_coracao - coracoes_mostrados
+	for i in coracoes_vazios:
+		var novo_coracao = TextureRect.new()
+		novo_coracao.texture = TEXTURA_CORACAO_VAZIO
+		_container_coracoes.add_child(novo_coracao)

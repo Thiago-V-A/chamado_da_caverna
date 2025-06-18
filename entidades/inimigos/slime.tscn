@@ -168,6 +168,7 @@ _data = {
 
 [node name="Slime" instance=ExtResource("1_fhohf")]
 _velocidade_de_movimento_normal = 48.0
+_vida = 6
 _entidade_agressiva = true
 
 [node name="Textura" parent="." index="0"]

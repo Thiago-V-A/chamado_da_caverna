@@ -181,9 +181,8 @@ _data = {
 }
 
 [node name="Slime" instance=ExtResource("1_qd3kl")]
-_velocidade_de_movimento_normal = 48.0
-_veolicdade_de_movimento_correndo = null
-_vida = null
+_velocidade_de_movimento_normal = 44.0
+_vida = 6
 _entidade_agressiva = true
 
 [node name="Textura" parent="." index="0"]

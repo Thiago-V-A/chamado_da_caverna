@@ -11,6 +11,7 @@ radius = 4.0
 
 [node name="objeto_de_base" instance=ExtResource("1_y0lpq")]
 objeto_que_destroi = "enxada"
+_vida = 3
 
 [node name="Colisao" parent="." index="0"]
 position = Vector2(0, -3)

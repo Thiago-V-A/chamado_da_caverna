@@ -1,28 +1,118 @@
-[gd_scene load_steps=5 format=3 uid="uid://dusk470l07qbk"]
+[gd_scene load_steps=8 format=3 uid="uid://dusk470l07qbk"]
 
 [ext_resource type="PackedScene" uid="uid://btcp3due1cynf" path="res://nivel-2/terreno_manager.tscn" id="1_namkp"]
 [ext_resource type="PackedScene" uid="uid://bsb2bd8y5r8wx" path="res://personagem/personagem.tscn" id="2_aev2q"]
-[ext_resource type="PackedScene" uid="uid://dt7b32o5fknfk" path="res://Inimigos/SlimeGreen/slime-green.tscn" id="3_aev2q"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_namkp"]
-radius = 2.0
-height = 10.0
+[ext_resource type="AudioStream" uid="uid://2yceu70c5n8m" path="res://Sons/SomCorrendoCaverna.mp3" id="3_4yion"]
+[ext_resource type="AudioStream" uid="uid://k4cqpsebvl2h" path="res://Sons/SomDaCaverna.mp3" id="4_g3hnt"]
+[ext_resource type="PackedScene" uid="uid://ot4ke2anlo0n" path="res://entidades/inimigos/esqueleto.tscn" id="5_3rodf"]
+[ext_resource type="PackedScene" uid="uid://cnohdjlikn5y3" path="res://entidades/inimigos/slime.tscn" id="6_5ag2e"]
+[ext_resource type="PackedScene" uid="uid://bkf8hvbs74sr0" path="res://entidades/inimigos/slime_verde.tscn" id="7_d28wc"]
 
 [node name="nivel-2" type="Node2D"]
 
 [node name="TerrenoManager" parent="." instance=ExtResource("1_namkp")]
 
 [node name="Personagem" parent="." instance=ExtResource("2_aev2q")]
-position = Vector2(46, 109)
-collision_layer = 1
+position = Vector2(65, -33)
+collision_mask = 7
 
-[node name="Camera2D2" type="Camera2D" parent="Personagem"]
+[node name="CameraPesonagem" type="Camera2D" parent="Personagem"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Personagem"]
-position = Vector2(0, -1)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_namkp")
+[node name="CorrendoNaCaverna" type="AudioStreamPlayer" parent="Personagem"]
+stream = ExtResource("3_4yion")
 
-[node name="SlimeGreen" parent="." instance=ExtResource("3_aev2q")]
-position = Vector2(186, 818)
-collision_layer = 2
+[node name="SomClimaCaverna" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_g3hnt")
+autoplay = true
+mix_target = 2
+playback_type = 1
+parameters/looping = true
+
+[node name="Esqueleto" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(538, -75)
+
+[node name="Slime" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(405, 784)
+
+[node name="Slime2" parent="." instance=ExtResource("7_d28wc")]
+position = Vector2(416, 1065)
+_veolicdade_de_movimento_correndo = 64.0
+_vida = 10
+
+[node name="Slime3" parent="." instance=ExtResource("7_d28wc")]
+position = Vector2(219, 769)
+_veolicdade_de_movimento_correndo = 64.0
+_vida = 10
+
+[node name="Slime4" parent="." instance=ExtResource("7_d28wc")]
+position = Vector2(283, 852)
+_veolicdade_de_movimento_correndo = 64.0
+_vida = 10
+
+[node name="Slime5" parent="." instance=ExtResource("7_d28wc")]
+position = Vector2(144, 873)
+_veolicdade_de_movimento_correndo = 64.0
+_vida = 10
+
+[node name="Esqueleto2" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(422, 166)
+
+[node name="Esqueleto13" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(464, 609)
+
+[node name="Esqueleto3" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(376, 439)
+
+[node name="Esqueleto4" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(509, 205)
+
+[node name="Esqueleto5" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(585, 115)
+
+[node name="Esqueleto6" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(414, 310)
+
+[node name="Slime6" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(-174, 729)
+
+[node name="Slime7" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(-342, 835)
+
+[node name="Slime8" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(-125, 572)
+
+[node name="Slime14" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(-85, 203)
+
+[node name="Slime13" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(44, 135)
+
+[node name="Slime9" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(-231, 384)
+
+[node name="Slime10" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(63, 692)
+
+[node name="Slime11" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(-274, -121)
+
+[node name="Slime12" parent="." instance=ExtResource("6_5ag2e")]
+position = Vector2(-271, 7)
+
+[node name="Esqueleto7" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(111, 394)
+
+[node name="Esqueleto8" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(40, 306)
+
+[node name="Esqueleto10" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(802, 84)
+
+[node name="Esqueleto11" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(247, 37)
+
+[node name="Esqueleto9" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(-87, -56)
+
+[node name="Esqueleto12" parent="." instance=ExtResource("5_3rodf")]
+position = Vector2(350, 97)

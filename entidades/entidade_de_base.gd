@@ -3,6 +3,7 @@ extends CharacterBody2D
 var direcao: Vector2
 var esta_correndo: bool = false
 var esta_atacando: bool = false
+var esta_atordoado: bool = false
 
 var personagem: CharacterBody2D
 
@@ -11,6 +12,7 @@ var personagem: CharacterBody2D
 @export var _animador: AnimationPlayer
 @export var _textura: Sprite2D
 @export var _tempo_de_ataque: Timer
+@export var _tempo_atordoamento: Timer
 
 @export var _velocidade_de_movimento_normal: float = 32
 @export var _veolicdade_de_movimento_correndo: float = 64
@@ -21,16 +23,22 @@ func _ready() -> void:
 	direcao = retornar_direcao_aleatoria()
 	_tempo_de_caminhada.start(5.00)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	if esta_atordoado:
+		velocity = velocity.move_toward(Vector2.ZERO, 500 * _delta) 
+		move_and_slide()
+		return
+		
 	velocity = _velocidade_de_movimento_normal * direcao
+	
 	if esta_correndo:
 		velocity = _veolicdade_de_movimento_correndo * direcao
 		
 	if is_instance_valid(personagem) and personagem.esta_vivo == true:
 		var distancia: float = global_position.distance_to(personagem.global_position)
-		if distancia < 16:
+		if distancia < 10:
 			if esta_atacando == false:
-				personagem.perdendo_vida(randi_range(1, 5))
+				personagem.perdendo_vida(1)
 				esta_atacando = true
 				_tempo_de_ataque.start()
 			
@@ -81,6 +89,9 @@ func _on_tempo_de_caminhada_timeout() -> void:
 		
 
 func perdendo_vida(_dano_recebido: int) -> void:
+	if esta_atordoado:
+		return
+
 	_vida -= _dano_recebido
 	if _vida > 0:
 		$AnimadorVida.play("perdendo_vida")
@@ -92,6 +103,12 @@ func perdendo_vida(_dano_recebido: int) -> void:
 			return
 		
 		if _entidade_agressiva:
+			esta_atordoado = true
+			_tempo_atordoamento.start(0.3)
+
+			if is_instance_valid(personagem):
+				var direcao_knockback = (global_position - personagem.global_position).normalized()
+				velocity = direcao_knockback * 100
 			return
 		
 	_kill()
@@ -133,7 +150,10 @@ func _on_tempo_de_ataque_timeout() -> void:
 
 
 
-
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	if _anim_name == "morrendo":
 		queue_free()
+
+
+func _on_temporizador_atordoamento_timeout() -> void:
+	esta_atordoado = false

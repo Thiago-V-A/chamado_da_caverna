@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://bln4ubpwfummd"]
+[gd_scene load_steps=32 format=4 uid="uid://b7v7dcqrb8rgk"]
 
 [ext_resource type="Texture2D" uid="uid://cn8a6c2y7d17k" path="res://terreno/tiles/Beach_Tile.png" id="1_vcjt7"]
 [ext_resource type="Texture2D" uid="uid://btfu3n3xphybg" path="res://terreno/tiles/Cliff_Tile.png" id="2_nj7bg"]

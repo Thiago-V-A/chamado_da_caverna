@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://uiw70dse8mbm"]
+
+[ext_resource type="Script" uid="uid://c3ttofti7nsw2" path="res://portal.gd" id="1_sfjos"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_508n2"]
+radius = 27.0185
+
+[node name="portal" type="Area2D"]
+script = ExtResource("1_sfjos")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_508n2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

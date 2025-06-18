@@ -1,8 +1,10 @@
-[gd_scene load_steps=134 format=3 uid="uid://bsb2bd8y5r8wx"]
+[gd_scene load_steps=136 format=3 uid="uid://bsb2bd8y5r8wx"]
 
 [ext_resource type="Script" uid="uid://cw2ulu4u7xxej" path="res://personagem/personagem.gd" id="1_eg6rg"]
 [ext_resource type="Texture2D" uid="uid://cat7j6bxywtyl" path="res://personagem/acoes_padrao.png" id="2_eg6rg"]
+[ext_resource type="AudioStream" uid="uid://dfhno7mtljrbs" path="res://Sons/SomAtaqueEspada1.mp3" id="2_u10kq"]
 [ext_resource type="Texture2D" uid="uid://bnhvm2tuu0xps" path="res://personagem/acoes.png" id="3_7syfo"]
+[ext_resource type="AudioStream" uid="uid://ck38x5qbshqf5" path="res://Sons/pickaxe 4.wav" id="3_rsmhl"]
 [ext_resource type="Texture2D" uid="uid://b462ut51nf8kk" path="res://interface/armas/espada.png" id="4_defmj"]
 
 [sub_resource type="Animation" id="Animation_7syfo"]
@@ -476,6 +478,21 @@ tracks/3/keys = {
 "update": 0,
 "values": [0, 1, 2, 3]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioAtaque")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.253964,
+"stream": ExtResource("2_u10kq")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_k8ww1"]
 resource_name = "atacando_espada_cima"
@@ -529,6 +546,21 @@ tracks/3/keys = {
 "update": 0,
 "values": [0, 1, 2, 3]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioAtaque")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.253964,
+"stream": ExtResource("2_u10kq")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_2ukpe"]
 resource_name = "atacando_espada_direita"
@@ -582,6 +614,21 @@ tracks/3/keys = {
 "update": 0,
 "values": [0, 1, 2, 3]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioAtaque")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.253964,
+"stream": ExtResource("2_u10kq")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_d35bf"]
 resource_name = "atacando_espada_esquerda"
@@ -635,6 +682,21 @@ tracks/3/keys = {
 "update": 0,
 "values": [0, 1, 2, 3]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioAtaque")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.253964,
+"stream": ExtResource("2_u10kq")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_ur52x"]
 resource_name = "atacando_machado_baixo"
@@ -900,6 +962,21 @@ tracks/3/keys = {
 "update": 0,
 "values": [0, 1]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioAtaque")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_rsmhl")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_u5s58"]
 resource_name = "atacando_picareta_cima"
@@ -953,6 +1030,21 @@ tracks/3/keys = {
 "update": 0,
 "values": [0, 1]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioAtaque")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_rsmhl")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_8qsj1"]
 resource_name = "atacando_picareta_direita"
@@ -1006,6 +1098,21 @@ tracks/3/keys = {
 "update": 0,
 "values": [false]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioAtaque")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_rsmhl")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_hjfht"]
 resource_name = "atacando_picareta_esquerda"
@@ -1059,6 +1166,21 @@ tracks/3/keys = {
 "update": 1,
 "values": [0, 1]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioAtaque")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_rsmhl")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_n7fro"]
 resource_name = "atacando_regador_baixo"
@@ -2369,17 +2491,6 @@ _velocidade_de_movimento = 96.0
 _animador_do_personagem = NodePath("AnimationPlayer")
 _temporizador_de_acoes = NodePath("TemporazidaroDeAcoes")
 _area_de_ataque = NodePath("AreaDeAtaque")
-_vida = 2
-
-[node name="Textura" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-position = Vector2(0.5, -7)
-scale = Vector2(0.997557, 1)
-texture = ExtResource("2_eg6rg")
-flip_h = true
-hframes = 6
-vframes = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -2406,7 +2517,7 @@ shape = SubResource("CircleShape2D_defmj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_fc31w")
-animation = &"morte"
+animation = &"atacando_picareta_baixo"
 frame = 1
 
 [node name="AnimadorVida" type="AnimationPlayer" parent="."]
@@ -2420,10 +2531,20 @@ libraries = {
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -64.0
+offset_top = -42.0
 offset_right = 64.0
+offset_bottom = 22.0
 grow_vertical = 0
+scale = Vector2(0.65, 0.65)
 texture = ExtResource("4_defmj")
+
+[node name="ContainerCoracoes" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.35, 0.35)
+theme_override_constants/separation = -5
+
+[node name="AudioAtaque" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="TemporazidaroDeAcoes" to="." method="_on_temporazidaro_de_acoes_timeout"]

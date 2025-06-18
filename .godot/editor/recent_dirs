@@ -1,9 +1,11 @@
+res://decoracao/objetos
+res://Sons
+res://interface/interface
 res://interface
 res://terreno
 res://personagem
 res://entidades/inimigos
 res://entidades
-res://decoracao/objetos
 res://entidades/animais/Sheep
 res://entidades/animais/Pig
 res://entidades/animais/Cow

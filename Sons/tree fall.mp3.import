@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d0mkrx1psr5a2"
+path="res://.godot/imported/tree fall.mp3-fbe1e27b5469c15e9beb1d1ffa998c10.mp3str"
+
+[deps]
+
+source_file="res://Sons/tree fall.mp3"
+dest_files=["res://.godot/imported/tree fall.mp3-fbe1e27b5469c15e9beb1d1ffa998c10.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
