@@ -36,22 +36,18 @@ position = Vector2(405, 784)
 
 [node name="Slime2" parent="." instance=ExtResource("7_d28wc")]
 position = Vector2(416, 1065)
-_veolicdade_de_movimento_correndo = 64.0
 _vida = 10
 
 [node name="Slime3" parent="." instance=ExtResource("7_d28wc")]
 position = Vector2(219, 769)
-_veolicdade_de_movimento_correndo = 64.0
 _vida = 10
 
 [node name="Slime4" parent="." instance=ExtResource("7_d28wc")]
 position = Vector2(283, 852)
-_veolicdade_de_movimento_correndo = 64.0
 _vida = 10
 
 [node name="Slime5" parent="." instance=ExtResource("7_d28wc")]
 position = Vector2(144, 873)
-_veolicdade_de_movimento_correndo = 64.0
 _vida = 10
 
 [node name="Esqueleto2" parent="." instance=ExtResource("5_3rodf")]

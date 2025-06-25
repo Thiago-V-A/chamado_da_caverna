@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b76g3bpdjg1ly"]
+
+[ext_resource type="Script" uid="uid://dvqtqor2f6ohc" path="res://tutorial/tutorial.gd" id="1_t57g5"]
+[ext_resource type="Texture2D" uid="uid://drknp2npheplk" path="res://tutorial/wasd.png" id="13_3e0vf"]
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource("1_t57g5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LabelLeft" type="RichTextLabel" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LabelRight" type="RichTextLabel" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="awsd" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("13_3e0vf")

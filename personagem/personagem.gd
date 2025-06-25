@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+var movimento_travado: bool = false
 var esta_vivo: bool = true
 var _arma_atual: String = "espada"
 var _sufixo_da_animacao: String = "_baixo"
@@ -178,3 +178,10 @@ func _atualizar_vida_hud() -> void:
 		var novo_coracao = TextureRect.new()
 		novo_coracao.texture = TEXTURA_CORACAO_VAZIO
 		_container_coracoes.add_child(novo_coracao)
+# Adicione estas funções novas
+func travar_movimento():
+	movimento_travado = true
+	_animador_do_personagem.play("parado" + _sufixo_da_animacao)
+	
+func destravar_movimento():
+	movimento_travado = false
